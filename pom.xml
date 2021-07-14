@@ -110,6 +110,7 @@
     <module>tajo-cluster-tests</module>
     <module>tajo-tablespace-example</module>
     <module>tajo-dist</module>
+    <module>tajo-coverage</module>
   </modules>
 
   <build>
