@@ -69,6 +69,11 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>pentaho-public</id>
+      <name>Pentaho Public</name>
+      <url>https://repo.orl.eng.hitachivantara.com/artifactory/pnt-mvn/</url>
+    </repository>
   </repositories>
 
   <properties>
@@ -86,7 +91,28 @@
 	<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 	<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
   </properties>
-
+	
+ <!-- dependencies for all modules -->
+<dependencyManagement>
+    <dependencies>
+	    <dependency>
+	    <groupId>org.pentaho</groupId>
+	    <artifactId>pentaho-aggdesigner-algorithm</artifactId>
+	    <version>5.1.5-jhyde</version>
+	    <scope>system</scope>
+	    <systemPath>${pom.basedir}/lib/pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar</systemPath>
+	</dependency>
+</dependencies>
+</dependencyManagement>
+  <dependencies>
+	<dependency>
+	    <groupId>org.pentaho</groupId>
+	    <artifactId>pentaho-aggdesigner-algorithm</artifactId>
+	    <version>5.1.5-jhyde</version>
+	    <scope>system</scope>
+	    <systemPath>${pom.basedir}/lib/pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar</systemPath>
+	</dependency>
+</dependencies>
   <modules>
     <module>tajo-maven-plugins</module>
     <module>tajo-project</module>
