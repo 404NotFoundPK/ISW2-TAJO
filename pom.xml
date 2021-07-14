@@ -82,9 +82,9 @@
 	<sonar.links.ci>https://travis-ci.org/404NotFoundPK/ISW2-tajo</sonar.links.ci>
 	<sonar.links.scm>https://github.com/404NotFoundPK/ISW2-tajo</sonar.links.scm>
 	<sonar.links.issue>https://github.com/404NotFoundPK/ISW2-tajo/issues</sonar.links.issue>
-    <aggregate.report.dir>tests/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+        <aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
 	<jacoco-maven-plugin.version>0.8.0</jacoco-maven-plugin.version>
-	  <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+	<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
   </properties>
 
   <modules>
