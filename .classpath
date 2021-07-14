@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/tajo-jdbc-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-algebra-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-catalog-client-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-catalog-common-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-catalog-server-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-cli-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-client-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-client-example-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-common-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-core-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-hive-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-metrics-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-plan-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-pullserver-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-rpc-protobuf-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-storage-common-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-storage-hbase-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-storage-hdfs-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-storage-jdbc-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-storage-pgsql-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/tajo-ws-rs-0.11.3.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-core-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar"/>
+	<classpathentry kind="src" path="target/generated-sources/annotations">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="m2e-apt" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="m2e-apt" value="true"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
