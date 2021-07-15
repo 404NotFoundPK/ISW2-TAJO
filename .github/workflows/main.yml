@@ -37,7 +37,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -U -DskipTests sonar:sonar -Dsonar.projectKey=404NotFoundPK_ISW2-TAJO -Dcoverage=true 
+        run: 
+          mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -U -DskipTests sonar:sonar -Dsonar.projectKey=404NotFoundPK_ISW2-TAJO -Dcoverage=true 
+          export JAVA_HOME=/path/to/java11
+          mvn sonar:sonar -Dsonar.projectKey=404NotFoundPK_ISW2-TAJO -Dcoverage=true
              
       - name: 'Publish Test Report'
         if: always()
