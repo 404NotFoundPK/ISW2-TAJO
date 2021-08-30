@@ -87,8 +87,10 @@
 	<sonar.links.ci>https://travis-ci.org/404NotFoundPK/ISW2-tajo</sonar.links.ci>
 	<sonar.links.scm>https://github.com/404NotFoundPK/ISW2-tajo</sonar.links.scm>
 	<sonar.links.issue>https://github.com/404NotFoundPK/ISW2-tajo/issues</sonar.links.issue>
-        <aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
-	<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+	  
+	  <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+	    <aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+	    <testRetryCount>2</testRetryCount>
 	<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 	<maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -294,19 +296,18 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.jacoco</groupId>
-						<artifactId>jacoco-maven-plugin</artifactId>
-						<version>${jacoco-maven-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>report</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>report-aggregate</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+					    <groupId>org.jacoco</groupId>
+					    <artifactId>jacoco-maven-plugin</artifactId>
+					    <version>${jacoco-maven-plugin.version}</version>
+					    <executions>
+					      <execution>
+						<id>prepare-agent</id>
+						<goals>
+						  <goal>prepare-agent</goal>
+						</goals>
+					      </execution>
+					    </executions>
+					  </plugin>
 				</plugins>
 			</build>
 		</profile>
