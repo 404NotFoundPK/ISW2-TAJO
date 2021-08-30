@@ -89,7 +89,11 @@
 	<sonar.links.issue>https://github.com/404NotFoundPK/ISW2-tajo/issues</sonar.links.issue>
 	  
 	  <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-	    <aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+	    <surefire-forkcount>8</surefire-forkcount>
+	  <!--Jacoco-->
+    <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+    <aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../coverage/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	    <testRetryCount>2</testRetryCount>
 	<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 	<maven.compiler.source>1.8</maven.compiler.source>
@@ -269,32 +273,31 @@
           </execution>
         </executions>
       </plugin>
+	    <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+        <executions>
+              <execution>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <phase>test</phase>
+                <goals>
+                    <goal>report</goal>
+                </goals>
+                <configuration>
+
+                    <sourceDirectory>src/main/java</sourceDirectory>
+                    <!-- see above -->
+                    <outputDirectory>coverage/jacoco-report</outputDirectory>
+                </configuration>
+            </execution>
+            </executions>
+      </plugin>
     </plugins>
   </build>
-
-  <profiles>
-<profile>
-	<id>coverage</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-					    <groupId>org.jacoco</groupId>
-					    <artifactId>jacoco-maven-plugin</artifactId>
-					    <version>${jacoco-maven-plugin.version}</version>
-					    <executions>
-					      <execution>
-						<id>prepare-agent</id>
-						<goals>
-						  <goal>prepare-agent</goal>
-						</goals>
-					      </execution>
-					    </executions>
-					  </plugin>
-				</plugins>
-			</build>
-		</profile>
-  </profiles>
 </project>
