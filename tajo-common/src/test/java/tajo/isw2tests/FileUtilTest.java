@@ -1,4 +1,4 @@
-package org.apache.tajo;
+package org.apache.tajo.isw2tests;
 
 import static org.junit.Assert.assertEquals;
 
