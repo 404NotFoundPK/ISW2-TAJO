@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.tajo.conf.TajoConf;
+import org.apache.tajo.util.FileUtil;
 import org.junit.After;
 import org.junit.Test;
 
