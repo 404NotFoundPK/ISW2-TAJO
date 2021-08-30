@@ -2,15 +2,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 <parent>
-        <artifactId>parent</artifactId>
-        <groupId>org.apache.tajo</groupId>
-        <version>0.12.0-SNAPSHOT</version>
-    </parent>
+    <artifactId>tajo-project</artifactId>
+    <groupId>org.apache.tajo</groupId>
+    <version>0.12.0-SNAPSHOT</version>
+    <relativePath>../tajo-project</relativePath>
+  </parent>
+ 
     <modelVersion>4.0.0</modelVersion>
 
    <artifactId>tajo-coverage</artifactId>
 	<name>Tajo coverage</name>
-
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
