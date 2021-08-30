@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import org.apache.tajo.datum.DateDatum;
 import org.apache.tajo.datum.Datum;
+import org.apache.tajo.datum.DatumFactory;
 import org.apache.tajo.exception.TajoRuntimeException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
