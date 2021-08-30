@@ -50,7 +50,7 @@ public class FileUtilTest {
     assertEquals("Hello world", str);  
   }
 
-  @Test
+  /*@Test
   public void writeTextToFileWithNotFoundExceptionTest() throws IOException {
     File file = new File("/Files/FilesLogged.txt");
     Path path = new Path("/Files/FilesLogged.txt");
@@ -61,7 +61,7 @@ public class FileUtilTest {
     FileUtil.writeTextToFile("Hello world", path);
     String str = FileUtil.readTextFile(file);
     assertEquals("Hello world", str);  
-  }
+  }*/
 
   @Test
   public void readTextFromStreamTest() throws IOException {
