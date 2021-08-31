@@ -25,13 +25,18 @@ jobs:
         with:
           java-version: 11
           
-      - name: Build and analyze 2
+      #- name: Cache Docker images
+      #  uses: satackey/action-docker-layer-caching@v0.0.11
+      #  # Ignore the failure of a step and avoid terminating the job.
+      #  continue-on-error: true
+
+      - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn clean test -Pcoverage
-          
-      - name: Build and analyze 3
+        
+      - name: Build and analyze 2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
