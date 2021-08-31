@@ -1613,22 +1613,6 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
       if (checkIfExist(binaryType.type_length())) {
         typeDefinition.setLengthOrPrecision(Integer.parseInt(binaryType.type_length().NUMBER().getText()));
       }
-    } else if (checkIfExist(predefined_type.complex_type())) {
-      Complex_typeContext complexType = predefined_type.complex_type();
-
-      if (checkIfExist(complexType.array_type())) {
-        DataTypeExpr elementType = visitData_type(complexType.array_type().data_type());
-        typeDefinition = new DataTypeExpr(new DataTypeExpr.ArrayType(elementType));
-
-      } else if (checkIfExist(complexType.record_type())) {
-        ColumnDefinition[] nestedRecordDefine = getDefinitions(complexType.record_type().table_elements());
-        typeDefinition = new DataTypeExpr(new DataTypeExpr.RecordType(nestedRecordDefine));
-
-      } else if (checkIfExist(complexType.map_type())) {
-        Map_typeContext mapTypeContext = complexType.map_type();
-        typeDefinition = new DataTypeExpr(
-            new MapType(visitData_type(mapTypeContext.key_type), visitData_type(mapTypeContext.value_type)));
-      }
     } else {
       throw new TajoInternalError("Reached code points that shouldn't be reached");
     }
