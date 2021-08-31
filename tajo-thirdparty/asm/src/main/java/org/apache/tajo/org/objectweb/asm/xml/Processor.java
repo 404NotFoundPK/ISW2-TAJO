@@ -267,14 +267,6 @@ public class Processor {
                 ClassReader cr = new ClassReader(readEntry(zis, ze));
                 cr.accept(new SAXClassAdapter(handler, singleInputDocument), 0);
 
-            } else { // read XML and process it with handler
-                XMLReader reader = XMLReaderFactory.createXMLReader();
-                reader.setContentHandler(handler);
-                reader.parse(new InputSource(
-                        singleInputDocument ? (InputStream) new ProtectedInputStream(
-                                zis) : new ByteArrayInputStream(readEntry(zis,
-                                ze))));
-
             }
         } catch (Exception ex) {
             update(ze.getName(), 0);
