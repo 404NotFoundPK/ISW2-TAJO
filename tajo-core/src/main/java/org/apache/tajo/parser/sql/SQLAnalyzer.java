@@ -1924,7 +1924,7 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
   private List<String> getPropertyKeys(Property_listContext ctx) {
     List<String> keys = Lists.newArrayList();
     for (int i = 0; i < ctx.property().size(); i++) {
-      keys.add(stripQuote(ctx.property(i).key.key.getText()));
+      keys.add(stripQuote(ctx.property(i).key.getText()));
     }
     return keys;
   }
@@ -1968,9 +1968,6 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
             break;
           case SET:
             val = val | SET_MASK;
-            break;
-          case UNSET:
-            val = val | UNSET_MASK;
             break;
           case PROPERTY:
             val = val | PROPERTY_MASK;
