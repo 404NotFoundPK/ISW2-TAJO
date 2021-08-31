@@ -41,5 +41,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean install sonar:sonar -Dsonar.projectKey=404NotFoundPK_ISW2-TAJO
+        run: mvn clean install sonar:sonar -Drat.numUnapprovedLicenses=100 -Dsonar.projectKey=404NotFoundPK_ISW2-TAJO
      
