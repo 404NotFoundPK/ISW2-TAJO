@@ -89,6 +89,11 @@
       <artifactId>tajo-storage-hdfs</artifactId>
       <scope>provided</scope>
     </dependency>
+	   <dependency>
+      <groupId>org.apache.tajo</groupId>
+      <artifactId>tajo-sql-parser</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <profiles>
