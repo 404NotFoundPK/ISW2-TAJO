@@ -35,7 +35,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean install -Drat.numUnapprovedLicenses=200 -DskipTests
+        run: mvn clean test -Drat.numUnapprovedLicenses=200 -DskipTests
         
       - name: Setup Java 11
         uses: actions/setup-java@v1
