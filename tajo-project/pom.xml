@@ -778,8 +778,6 @@
 	    <groupId>org.apache.tajo</groupId>
 	    <artifactId>tajo-core</artifactId>
 	    <version>0.11.3</version>
-      <scope>system</scope>
-	    <systemPath>${pom.basedir}/lib/tajo-core-0.11.3.jar</systemPath>
 	</dependency>
       <dependency>
         <groupId>org.apache.tajo</groupId>
