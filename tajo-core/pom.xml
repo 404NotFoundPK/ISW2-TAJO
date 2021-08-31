@@ -162,6 +162,11 @@
 
 
   <dependencies>
+<dependency>
+    <groupId>org.antlr</groupId>
+    <artifactId>antlr4-runtime</artifactId>
+    <version>4.0</version>
+</dependency>
     <dependency>
       <groupId>org.apache.tajo</groupId>
       <artifactId>tajo-common</artifactId>
