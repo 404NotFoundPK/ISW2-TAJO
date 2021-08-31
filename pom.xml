@@ -87,17 +87,9 @@
 	<sonar.links.ci>https://travis-ci.org/404NotFoundPK/ISW2-tajo</sonar.links.ci>
 	<sonar.links.scm>https://github.com/404NotFoundPK/ISW2-tajo</sonar.links.scm>
 	<sonar.links.issue>https://github.com/404NotFoundPK/ISW2-tajo/issues</sonar.links.issue>
-	  
-	  <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-	    <surefire-forkcount>8</surefire-forkcount>
-	  <!--Jacoco-->
-    <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-    <aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
-    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../coverage/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-	    <testRetryCount>2</testRetryCount>
+        <aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+	<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 	<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-	<maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 	
  <!-- dependencies for all modules -->
@@ -113,8 +105,21 @@
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
-	    <version>5.1.39</version>
+	    <version>8.0.26</version>
 	</dependency>
+  <dependency>
+	    <groupId>org.apache.tajo</groupId>
+	    <artifactId>tajo-sql-parser</artifactId>
+	    <version>0.11.3</version>
+      <scope>system</scope>
+	    <systemPath>${pom.basedir}/lib/tajo-sql-parser-0.11.3.jar</systemPath>
+	</dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
 </dependencies>
 </dependencyManagement>
   <dependencies>
@@ -128,7 +133,7 @@
 	  <dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
-	    <version>5.1.39</version>
+	    <version>8.0.26</version>
 	</dependency>
 </dependencies>
   <modules>
@@ -143,7 +148,7 @@
     <module>tajo-client</module>
     <module>tajo-client-example</module>
     <module>tajo-jdbc</module>
-    <module>tajo-sql-parser</module>
+    <!-- <module>tajo-sql-parser</module> -->
     <module>tajo-storage</module>
     <module>tajo-pullserver</module>
     <module>tajo-yarn</module>
@@ -166,24 +171,30 @@
           <version>2.4</version>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>2.19</version>
-          <configuration>
-            <aggregate>true</aggregate>
-          </configuration>
-        </plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <testFailureIgnore>true</testFailureIgnore>
+          <argLine>-Xmx2G -Djava.net.preferIPv4Stack=true -Dio.netty.leakDetection.level=paranoid</argLine>
+          <redirectTestOutputToFile>${redirectTestOutputToFile}</redirectTestOutputToFile>
+          <forkCount>${forkCount.variable}</forkCount>
+          <reuseForks>false</reuseForks>
+          <trimStackTrace>false</trimStackTrace>
+          <forkedProcessTimeoutInSeconds>1800</forkedProcessTimeoutInSeconds>
+          <rerunFailingTestsCount>${testRetryCount}</rerunFailingTestsCount>
+        </configuration>
+      </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.3</version>
-          <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-            <encoding>${project.build.sourceEncoding}</encoding>
-          </configuration>
-        </plugin>
-        <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
+	<plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>1.4</version>
@@ -193,37 +204,10 @@
                 <version>[3.0.2,)</version>
               </requireMavenVersion>
               <requireJavaVersion>
-                <version>1.8</version>
+                <version>16</version>
               </requireJavaVersion>
             </rules>
           </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.4.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.5</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.rat</groupId>
-          <artifactId>apache-rat-plugin</artifactId>
-          <version>0.8</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.0</version>
-          <dependencies>
-            <dependency><!-- add support for ssh/scp -->
-              <groupId>org.apache.maven.wagon</groupId>
-              <artifactId>wagon-ssh</artifactId>
-              <version>1.0</version>
-            </dependency>
-          </dependencies>
         </plugin>
 	<plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
@@ -248,7 +232,7 @@
         <plugin>
           <groupId>org.apache.rat</groupId>
           <artifactId>apache-rat-plugin</artifactId>
-          <version>0.12</version>
+          <version>0.8</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -294,7 +278,7 @@
           </execution>
         </executions>
       </plugin>
-	    <plugin>
+      <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
         <inherited>false</inherited>
@@ -309,31 +293,33 @@
           </excludes>
         </configuration>
       </plugin>
-	    <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco-maven-plugin.version}</version>
-        <executions>
-              <execution>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>report</id>
-                <phase>test</phase>
-                <goals>
-                    <goal>report</goal>
-                </goals>
-                <configuration>
-
-                    <sourceDirectory>src/main/java</sourceDirectory>
-                    <!-- see above -->
-                    <outputDirectory>coverage/jacoco-report</outputDirectory>
-                </configuration>
-            </execution>
-            </executions>
-      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+<profile>
+	<id>coverage</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${jacoco-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>report</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>report-aggregate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+  </profiles>
 </project>
