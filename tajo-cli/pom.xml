@@ -141,8 +141,6 @@
 	    <groupId>org.apache.tajo</groupId>
 	    <artifactId>tajo-sql-parser</artifactId>
 	    <version>0.11.3</version>
-      <scope>system</scope>
-	    <systemPath>${pom.basedir}/lib/tajo-sql-parser-0.11.3.jar</systemPath>
 	</dependency>
     <dependency>
       <groupId>commons-cli</groupId>
