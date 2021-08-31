@@ -1934,10 +1934,6 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
       alterTable.setParams(getProperties(ctx.property_list()));
     }
 
-    if (checkIfExist(ctx.property_key_list())) {
-      alterTable.setUnsetPropertyKeys(getPropertyKeys(ctx.property_key_list()));
-    }
-
     alterTable.setAlterTableOpType(determineAlterTableType(ctx));
 
     return alterTable;
@@ -1952,10 +1948,10 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
     return params;
   }
 
-  private List<String> getPropertyKeys(Property_key_listContext ctx) {
+  private List<String> getPropertyKeys(Property_listContext ctx) {
     List<String> keys = Lists.newArrayList();
-    for (int i = 0; i < ctx.property_key().size(); i++) {
-      keys.add(stripQuote(ctx.property_key(i).key.getText()));
+    for (int i = 0; i < ctx.property().size(); i++) {
+      keys.add(stripQuote(ctx.property(i).key.key.getText()));
     }
     return keys;
   }
