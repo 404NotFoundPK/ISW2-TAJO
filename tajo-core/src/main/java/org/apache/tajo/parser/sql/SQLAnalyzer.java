@@ -1655,17 +1655,6 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
       }
     }
 
-    if (checkIfExist(ctx.VALUES())) {
-      List<NamedExpr> values = ctx.row_value_predicand().stream()
-          .map(value -> new NamedExpr(visitRow_value_predicand(value)))
-          .collect(Collectors.toList());
-      Projection projection = new Projection();
-      projection.setNamedExprs(values);
-      insertExpr.setSubQuery(projection);
-    } else {
-      insertExpr.setSubQuery(visitQuery_expression(ctx.query_expression()));
-    }
-
     Preconditions.checkState(insertExpr.hasTableName() || insertExpr.hasLocation(),
         "Either a table name or a location should be given.");
     Preconditions.checkState(insertExpr.hasTableName() ^ insertExpr.hasLocation(),
