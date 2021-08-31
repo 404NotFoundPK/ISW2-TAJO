@@ -162,7 +162,6 @@
     <module>tajo-thirdparty/asm</module>
     <module>tajo-cli</module>
     <module>tajo-metrics</module>
-    <module>tajo-core-tests</module>
     <module>tajo-tablespace-example</module>
     <module>tajo-dist</module>
     <module>tajo-coverage</module>
