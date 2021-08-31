@@ -46,5 +46,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn clean test -Pcoverage
+          
+      - name: Build and analyze 3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Drat.numUnapprovedLicenses=100 sonar:sonar -Dsonar.projectKey=404NotFoundPK_ISW2-TAJO
      
