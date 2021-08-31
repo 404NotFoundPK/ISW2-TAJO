@@ -136,6 +136,11 @@
 	    <artifactId>mysql-connector-java</artifactId>
 	    <version>8.0.26</version>
 	</dependency>
+	  <dependency>
+      <groupId>org.apache.tajo</groupId>
+      <artifactId>tajo-core</artifactId>
+      <version>0.11.3</version>
+    </dependency>
 </dependencies>
   <modules>
     <module>tajo-maven-plugins</module>
@@ -143,7 +148,6 @@
     <module>tajo-common</module>
     <module>tajo-algebra</module>
     <module>tajo-plan</module>
-    <module>tajo-core</module>
     <module>tajo-rpc</module>
     <module>tajo-catalog</module>
     <module>tajo-client</module>
