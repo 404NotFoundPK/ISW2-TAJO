@@ -159,7 +159,6 @@
     <module>tajo-cli</module>
     <module>tajo-metrics</module>
     <module>tajo-tablespace-example</module>
-    <module>tajo-dist</module>
     <module>tajo-coverage</module>
   </modules>
 
