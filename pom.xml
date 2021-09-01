@@ -1,347 +1,364 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	you under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
 
-      http://www.apache.org/licenses/LICENSE-2.0
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.apache</groupId>
+		<artifactId>apache</artifactId>
+		<version>15</version>
+	</parent>
+	<groupId>org.apache.tajo</groupId>
+	<artifactId>tajo-main</artifactId>
+	<version>0.12.0-SNAPSHOT</version>
+	<description>Tajo Main</description>
+	<url>http://tajo.apache.org/</url>
+	<name>Tajo Main</name>
+	<packaging>pom</packaging>
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-  -->
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.apache</groupId>
-    <artifactId>apache</artifactId>
-    <version>15</version>
-  </parent>
-  <groupId>org.apache.tajo</groupId>
-  <artifactId>tajo-main</artifactId>
-  <version>0.12.0-SNAPSHOT</version>
-  <description>Tajo Main</description>
-  <url>http://tajo.apache.org/</url>
-  <name>Tajo Main</name>
-  <packaging>pom</packaging>
+	<organization>
+		<name>The Apache Software Foundation</name>
+		<url>http://www.apache.org/</url>
+	</organization>
 
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
+	<issueManagement>
+		<system>Jira</system>
+		<url>https://issues.apache.org/jira/browse/TAJO</url>
+	</issueManagement>
 
-  <organization>
-    <name>The Apache Software Foundation</name>
-    <url>http://www.apache.org/</url>
-  </organization>
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>https://builds.apache.org</url>
+	</ciManagement>
 
-  <issueManagement>
-    <system>Jira</system>
-    <url>https://issues.apache.org/jira/browse/TAJO</url>
-  </issueManagement>
+	<scm>
+		<url>https://github.com/apache/tajo.git</url>
+		<connection>scm:git:https://github.com/apache/tajo.git</connection>
+		<developerConnection>scm:git:https://github.com/apache/tajo.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 
-  <ciManagement>
-    <system>Jenkins</system>
-    <url>https://builds.apache.org</url>
-  </ciManagement>
+	<repositories>
+		<repository>
+			<id>eclipse-jetty</id>
+			<url>https://repo2.maven.org/maven2/org/eclipse/jetty/jetty-distribution/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
-  <scm>
-    <url>https://github.com/apache/tajo.git</url>
-    <connection>scm:git:https://github.com/apache/tajo.git</connection>
-    <developerConnection>scm:git:https://github.com/apache/tajo.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<tajo.root>${basedir}</tajo.root>
 
-  <repositories>
-    <repository>
-      <id>eclipse-jetty</id>
-      <url>https://repo2.maven.org/maven2/org/eclipse/jetty/jetty-distribution/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>pentaho-public</id>
-      <name>Pentaho Public</name>
-      <url>https://repo.orl.eng.hitachivantara.com/artifactory/pnt-mvn/</url>
-    </repository>
-  </repositories>
+		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <tajo.root>${basedir}</tajo.root>
+		<!-- Sonar configs -->
+		<sonar.host.url>http://sonarcloud.io</sonar.host.url>
+		<sonar.organization>404notfoundpk</sonar.organization>
+		<sonar.language>java</sonar.language>
+		<sonar.java.source>11</sonar.java.source>
+		<sonar.java.file.suffixes>.java</sonar.java.file.suffixes>
+		<sonar.verbose>true</sonar.verbose>
+		<aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+		<redirectTestOutputToFile>true</redirectTestOutputToFile>
+	</properties>
+
+	<modules>
+		<module>tajo-maven-plugins</module>
+		<module>tajo-project</module>
+		<module>tajo-common</module>
+		<module>tajo-algebra</module>
+		<module>tajo-plan</module>
+		<module>tajo-core</module>
+		<module>tajo-rpc</module>
+		<module>tajo-catalog</module>
+		<module>tajo-client</module>
+		<module>tajo-client-example</module>
+		<module>tajo-jdbc</module>
+		<module>tajo-sql-parser</module>
+		<module>tajo-storage</module>
+		<module>tajo-pullserver</module>
+		<module>tajo-yarn</module>
+		<module>tajo-thirdparty/asm</module>
+		<module>tajo-cli</module>
+		<module>tajo-metrics</module>
+		<module>tajo-tablespace-example</module>
+		<module>tajo-dist</module>
+		
+		<module>tajo-coverage</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-report-plugin</artifactId>
+					<version>2.19</version>
+					<configuration>
+						<aggregate>true</aggregate>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.3</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.4</version>
+					<configuration>
+						<rules>
+							<requireMavenVersion>
+								<version>[3.0.2,)</version>
+							</requireMavenVersion>
+							<requireJavaVersion>
+								<version>1.8</version>
+							</requireJavaVersion>
+						</rules>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.4.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.rat</groupId>
+					<artifactId>apache-rat-plugin</artifactId>
+					<version>0.13</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.0</version>
+					<dependencies>
+						<dependency><!-- add support for ssh/scp -->
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-ssh</artifactId>
+							<version>1.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-antrun-plugin</artifactId>
+										<versionRange>[1.6,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-resources-plugin</artifactId>
+										<versionRange>[2.2,)</versionRange>
+										<goals>
+											<goal>testResources</goal>
+											<goal>resources</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.avro</groupId>
+										<artifactId>avro-maven-plugin</artifactId>
+										<versionRange>[1.5.3,)</versionRange>
+										<goals>
+											<goal>schema</goal>
+											<goal>protocol</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo.jspc</groupId>
+										<artifactId>jspc-maven-plugin</artifactId>
+										<versionRange>[2.0-alpha-3,)</versionRange>
+										<goals>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[2.1,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+											<goal>build-classpath</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>exec-maven-plugin</artifactId>
+										<versionRange>[1.2,)</versionRange>
+										<goals>
+											<goal>exec</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-jar-plugin</artifactId>
+										<versionRange>[2.3.1,)</versionRange>
+										<goals>
+											<goal>test-jar</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>clean</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<phase>pre-clean</phase>
+					</execution>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+					<execution>
+						<id>site</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<phase>pre-site</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.rat</groupId>
+				<artifactId>apache-rat-plugin</artifactId>
+				<inherited>false</inherited>
+				<configuration>
+					<excludes>
+						<exclude>.git/**</exclude>
+						<exclude>.gitignore</exclude>
+						<exclude>.idea/**</exclude>
+						<exclude>.reviewboardrc</exclude>
+						<exclude>CHANGES</exclude>
+						<exclude>tajo-docs/src/main/sphinx/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>coverageProfile</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${jacoco-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>report</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>report-aggregate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	
-	<sonar.organization>404notfoundpk</sonar.organization>
-	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-	<sonar.links.homepage>https://github.com/404NotFoundPK/ISW2-tajo</sonar.links.homepage>
-	<sonar.links.ci>https://travis-ci.org/404NotFoundPK/ISW2-tajo</sonar.links.ci>
-	<sonar.links.scm>https://github.com/404NotFoundPK/ISW2-tajo</sonar.links.scm>
-	<sonar.links.issue>https://github.com/404NotFoundPK/ISW2-tajo/issues</sonar.links.issue>
-        <aggregate.report.dir>tajo-coverage/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
-	<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../coverage/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-	<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-	<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-  </properties>
-	
- <!-- dependencies for all modules -->
-<dependencyManagement>
-    <dependencies>
-	    <dependency>
-	    <groupId>org.pentaho</groupId>
-	    <artifactId>pentaho-aggdesigner-algorithm</artifactId>
-	    <version>5.1.5-jhyde</version>
-	    <scope>system</scope>
-	    <systemPath>${pom.basedir}/lib/pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar</systemPath>
-	</dependency>
-	<dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>8.0.26</version>
-	</dependency>
-  <dependency>
-	    <groupId>org.apache.tajo</groupId>
-	    <artifactId>tajo-sql-parser</artifactId>
-	    <version>0.11.3</version>
-	</dependency>
-	<dependency>
-      <groupId>org.apache.tajo</groupId>
-      <artifactId>tajo-core</artifactId>
-      <version>0.11.3</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-</dependencies>
-</dependencyManagement>
-  <dependencies>
-	<dependency>
-	    <groupId>org.pentaho</groupId>
-	    <artifactId>pentaho-aggdesigner-algorithm</artifactId>
-	    <version>5.1.5-jhyde</version>
-	    <scope>system</scope>
-	    <systemPath>${pom.basedir}/lib/pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar</systemPath>
-	</dependency>
-	  <dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>8.0.26</version>
-	</dependency>
-</dependencies>
-  <modules>
-    <module>tajo-maven-plugins</module>
-    <module>tajo-project</module>
-    <module>tajo-common</module>
-    <module>tajo-algebra</module>
-    <module>tajo-plan</module>
-    <module>tajo-rpc</module>
-    <module>tajo-catalog</module>
-    <module>tajo-client</module>
-    <module>tajo-client-example</module>
-    <module>tajo-jdbc</module>
-    <!-- <module>tajo-sql-parser</module> -->
-    <module>tajo-storage</module>
-    <module>tajo-pullserver</module>
-    <module>tajo-yarn</module>
-    <module>tajo-thirdparty/asm</module>
-    <module>tajo-cli</module>
-    <module>tajo-metrics</module>
-    <module>tajo-tablespace-example</module>
-    <module>tajo-coverage</module>
-  </modules>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-plugin.version}</version>
-        <configuration>
-          <testFailureIgnore>true</testFailureIgnore>
-          <argLine>-Xmx2G -Djava.net.preferIPv4Stack=true -Dio.netty.leakDetection.level=paranoid</argLine>
-          <redirectTestOutputToFile>${redirectTestOutputToFile}</redirectTestOutputToFile>
-          <forkCount>${forkCount.variable}</forkCount>
-          <reuseForks>false</reuseForks>
-          <trimStackTrace>false</trimStackTrace>
-          <forkedProcessTimeoutInSeconds>1800</forkedProcessTimeoutInSeconds>
-          <rerunFailingTestsCount>${testRetryCount}</rerunFailingTestsCount>
-        </configuration>
-      </plugin>
-        <plugin>
-             <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
-            </plugin>
-	<plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>1.4</version>
-	  <configuration>
-            <rules>
-              <requireMavenVersion>
-                <version>[3.0.2,)</version>
-              </requireMavenVersion>
-              <requireJavaVersion>
-                <version>1.8</version>
-              </requireJavaVersion>
-            </rules>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.4.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.5</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.rat</groupId>
-          <artifactId>apache-rat-plugin</artifactId>
-          <version>0.8</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.0</version>
-          <dependencies>
-            <dependency><!-- add support for ssh/scp -->
-              <groupId>org.apache.maven.wagon</groupId>
-              <artifactId>wagon-ssh</artifactId>
-              <version>1.0</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-	<plugin>
-          <groupId>org.sonarsource.scanner.maven</groupId>
-          <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.9.0.2155</version>
-        </plugin>
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>${jacoco-maven-plugin.version}</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <inherited>false</inherited>
-        <executions>
-          <execution>
-            <id>clean</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <phase>pre-clean</phase>
-          </execution>
-          <execution>
-            <id>default</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <phase>validate</phase>
-          </execution>
-          <execution>
-            <id>site</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <phase>pre-site</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.rat</groupId>
-        <artifactId>apache-rat-plugin</artifactId>
-        <inherited>false</inherited>
-        <configuration>
-          <excludes>
-            <exclude>.git/**</exclude>
-            <exclude>.gitignore</exclude>
-            <exclude>.idea/**</exclude>
-            <exclude>.reviewboardrc</exclude>
-            <exclude>CHANGES</exclude>
-            <exclude>tajo-docs/src/main/sphinx/**</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-<profiles>
-	<profile>
-      <id>coverage</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-
-          <plugin>
-            <groupId>org.eluder.coveralls</groupId>
-            <artifactId>coveralls-maven-plugin</artifactId>
-            <version>4.3.0</version>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven-surefire-plugin.version}</version>
-          </plugin>
-
-           <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco-maven-plugin.version}</version>
-        <executions>
-              <execution>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>report</id>
-                <phase>test</phase>
-                <goals>
-                    <goal>report</goal>
-                </goals>
-                <configuration>
-
-                    <sourceDirectory>src/main/java</sourceDirectory>
-                    <!-- see above -->
-                    <outputDirectory>coverage/jacoco-report</outputDirectory>
-                </configuration>
-            </execution>
-            </executions>
-      </plugin>
-        </plugins>
-      </build>
-    </profile>
-</profiles>
 </project>
