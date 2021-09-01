@@ -123,6 +123,7 @@
       <artifactId>tajo-storage-jdbc</artifactId>
       <scope>provided</scope>
     </dependency>
+
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-common</artifactId>

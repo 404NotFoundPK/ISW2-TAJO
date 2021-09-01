@@ -1613,6 +1613,22 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
       if (checkIfExist(binaryType.type_length())) {
         typeDefinition.setLengthOrPrecision(Integer.parseInt(binaryType.type_length().NUMBER().getText()));
       }
+    } else if (checkIfExist(predefined_type.complex_type())) {
+      Complex_typeContext complexType = predefined_type.complex_type();
+
+      if (checkIfExist(complexType.array_type())) {
+        DataTypeExpr elementType = visitData_type(complexType.array_type().data_type());
+        typeDefinition = new DataTypeExpr(new DataTypeExpr.ArrayType(elementType));
+
+      } else if (checkIfExist(complexType.record_type())) {
+        ColumnDefinition[] nestedRecordDefine = getDefinitions(complexType.record_type().table_elements());
+        typeDefinition = new DataTypeExpr(new DataTypeExpr.RecordType(nestedRecordDefine));
+
+      } else if (checkIfExist(complexType.map_type())) {
+        Map_typeContext mapTypeContext = complexType.map_type();
+        typeDefinition = new DataTypeExpr(
+            new MapType(visitData_type(mapTypeContext.key_type), visitData_type(mapTypeContext.value_type)));
+      }
     } else {
       throw new TajoInternalError("Reached code points that shouldn't be reached");
     }
@@ -1653,6 +1669,17 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
           insertExpr.setParams(escapeTableMeta(getParams(ctx.param_clause())));
         }
       }
+    }
+
+    if (checkIfExist(ctx.VALUES())) {
+      List<NamedExpr> values = ctx.row_value_predicand().stream()
+          .map(value -> new NamedExpr(visitRow_value_predicand(value)))
+          .collect(Collectors.toList());
+      Projection projection = new Projection();
+      projection.setNamedExprs(values);
+      insertExpr.setSubQuery(projection);
+    } else {
+      insertExpr.setSubQuery(visitQuery_expression(ctx.query_expression()));
     }
 
     Preconditions.checkState(insertExpr.hasTableName() || insertExpr.hasLocation(),
@@ -1907,6 +1934,10 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
       alterTable.setParams(getProperties(ctx.property_list()));
     }
 
+    if (checkIfExist(ctx.property_key_list())) {
+      alterTable.setUnsetPropertyKeys(getPropertyKeys(ctx.property_key_list()));
+    }
+
     alterTable.setAlterTableOpType(determineAlterTableType(ctx));
 
     return alterTable;
@@ -1921,10 +1952,10 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
     return params;
   }
 
-  private List<String> getPropertyKeys(Property_listContext ctx) {
+  private List<String> getPropertyKeys(Property_key_listContext ctx) {
     List<String> keys = Lists.newArrayList();
-    for (int i = 0; i < ctx.property().size(); i++) {
-      keys.add(stripQuote(ctx.property(i).key.getText()));
+    for (int i = 0; i < ctx.property_key().size(); i++) {
+      keys.add(stripQuote(ctx.property_key(i).key.getText()));
     }
     return keys;
   }
@@ -1968,6 +1999,9 @@ public class SQLAnalyzer extends SQLParserBaseVisitor<Expr> {
             break;
           case SET:
             val = val | SET_MASK;
+            break;
+          case UNSET:
+            val = val | UNSET_MASK;
             break;
           case PROPERTY:
             val = val | PROPERTY_MASK;
